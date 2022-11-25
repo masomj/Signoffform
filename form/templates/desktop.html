@@ -1,0 +1,23 @@
+{%extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-start">
+    <h2>Desktop Sign Off</h2>
+</div>
+
+
+<form method="POST" action="{{url_for('desktop')}}">
+    <fieldset>
+        {{form.desktopSignOff.label}}
+        {{form.desktopSignOff}}
+    </fieldset>
+    {{form.contactedUser}}
+    <fieldset>
+        
+        {{form.contactedUser}}
+    </fieldset>
+
+    {{ form.submit }}
+
+    
+</form>
+{% endblock %}
