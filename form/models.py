@@ -2,7 +2,11 @@ from form import db #set env variable
 from sqlalchemy.orm import backref
 from sqlalchemy import Column, Integer, String, Boolean, Date
 
+
+
+
 class SignOffForms(db.Model):
+
     __tablename__ = "SignOffForms"
     id = db.Column(db.Integer, primary_key=True)
     provisioningForm = db.relationship('Provisioning',backref='SignOffForms',cascade="all, delete", lazy=True)

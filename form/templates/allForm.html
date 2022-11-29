@@ -1,8 +1,74 @@
 {%extends "base.html" %}
 {% block content %}
-<div class="d-flex justify-content-start">
-    <h2>All Items</h2>
+<div class="container">
+
+    <div class="d-flex justify-content-start">
+        <h2>All Items</h2>
+    </div>
+    <div class="justify-content-start">
+        {{ pagination.links }}
+       
+    </div>
+
+    <a href="{{url_for('create_form')}}" class="btn btn-primary">New Form</a>
+
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        Provisioning
+                    </th>
+                    <th>
+                        Desktop
+                    </th>
+                    <th>
+                        User
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for form in forms%}
+                <tr>
+                    <td>
+                        
+                        {{form.id}}
+                    </td>
+                    <td>
+                        {%if form.provisioningForm %}
+                            <a href="{{url_for('editprovisioning', form_id=form.id, prov_form=form.provisioningForm )}}"><button class="btn btn-primary btn-sm">Edit</button></a>
+                        {%else%}
+                        <a href="{{url_for('provisioning', form_id=form.id)}}"><button class="btn btn-primary btn-sm">Create</button></a>
+                        {%endif%}
+                        <p>test  {{ form.provisioningForm.form_id }}</p>
+                        
+                            
+                    </td>
+                    <td>
+                        {%if form.desktopForm%}
+                            <a href="{{url_for('desktop', form_id=form.id )}}"><button class="btn btn-primary btn-sm">Edit</button></a>
+                        {%else%}
+                        <a href="{{url_for('desktop', form_id=form.id )}}"><button class="btn btn-primary btn-sm">Create</button></a>
+                        {%endif%}
+                        
+                    </td>
+                    <td>
+                        {%if form.userForm %}
+                            <a href="{{url_for('user', form_id=form.id )}}"><button class="btn btn-primary btn-sm">Edit</button></a>
+                        {%else%}
+                        <a href="{{url_for('user', form_id=form.id)}}"><button class="btn btn-primary btn-sm">Create</button></a>
+                        {%endif%}
+                    </td>
+
+                </tr>
+                {%endfor%}
+
+            </tbody>
+        </table>
+    </div>
+
 </div>
-
-
 {% endblock %}

@@ -7,27 +7,27 @@
         <h2>Desktop Sign Off</h2>
     </div>
 
-    <form method="POST" action="{{url_for('desktop', form_id=form.id)}}" class="">
+    <form method="POST" action="{{url_for('desktop')}}" class="">
         <div class="form-check pb-1">
-            <input  class="form-check-input" type="checkbox" id="contactedUser" value="True" name="contactedUser" required>
+            <input  class="form-check-input" type="checkbox" id="contactedUser" value="contactedUser" required>
             <label for="contacterUser" class="form-check-label">Contacted User?</label>
         </div>
         <div class="form-check pb-1">
-            <input class="form-check-input" type="checkbox" value="True" name="collectOldDevice" required>
+            <input class="form-check-input" type="checkbox" value="collectOldDevice" required>
             <label for="collectOldDevice" class="form-check-label">Collect Old Device</label>
         </div>
         <div class="form-check pb-1">
-            <input class="form-check-input"type="checkbox" id="changeBitlocker" name="changeBitlocker" value="True" required>
+            <input class="form-check-input"type="checkbox" id="changeBitlocker" value="changeBitlocker" required>
             <label for="changeBitlocker" class="form-check-label">Change Bitlocker</label>
         </div>
         <div class="form-check pb-1"> 
-            <input  class="form-check-input"type="checkbox" id="checkIP" value="True" name="checkIP" required>
+            <input  class="form-check-input"type="checkbox" id="checkIP" value="checkIP" required>
             <label for="checkIP" class="form-check-label">Check for any IP Resrvations</label>
         </div>
         <div class="form-group pb-1 row">
             <div class="col-lg-4">
                 <label for="desktopUser">Desktop Support Team Member</label>
-                <input class="form-control" type="text" id="desktopUser" name="desktopUser"required>
+                <input class="form-control" type="text" id="desktopUser" required>
             </div>
         </div>
 
