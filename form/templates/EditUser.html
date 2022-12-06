@@ -5,7 +5,9 @@
     <div class="d-flex justify-content-start">
         <h2>User Declaration</h2>
     </div>
-    <form method="POST" action="{{url_for('user')}}" class="">
+
+    {% if user_form_data.closed %}
+    <form class="">
         <p>I declare that on receiving this device, I am responsible for the SBU IT asset. 
             Any changes in ownership within my department must first be authorised with my line manager. 
             Once agreed, I will log a call on the IT Service Desk for this to be authorised and actioned by the SBU IT team. 
@@ -18,12 +20,37 @@
             <div class="form-group pb-1 row">
                 <div class="col-lg-4">
                     <label for="receivingUser">Receiving User</label>
-                    <input class="form-control" type="text" id="receivingUser" placeholder="Username" required>
+                    <input class="form-control" type="text" id="receivingUser" readonly placeholder="Username"  name ="username"  required value="{{user_form_data.staffMember}}">
                 </div>
             </div>
-            
-            <button type="submit" class="btn btn-primary mt-1">Submit</button>
     </form>
+        
+    {%else%}
+
+    <form method="POST" action="{{url_for('edituser',form_id=form.id, user_form_id = user_form_data.id)}}" class="">
+        <p>I declare that on receiving this device, I am responsible for the SBU IT asset. 
+            Any changes in ownership within my department must first be authorised with my line manager. 
+            Once agreed, I will log a call on the IT Service Desk for this to be authorised and actioned by the SBU IT team. 
+            If this device is no longer required, I will log a call on the IT Service Desk for it to be returned to IT. 
+            If I am leaving SBUHB or leaving my current role I will log a call on the IT Service Desk, stating my final day of work in the HB/Department and my current line manager. 
+            Any damages incurred are the responsibility of the department. 
+            A departmental cost code will be required in the event of accidental damage and a call will be logged with SBU IT, immediately.</p>
+        <p class="text-danger"><strong>I UNDERSTAND THAT NO IT EQUIPMENT WILL LEAVE IT’S CURRENTLY ASSIGNED DEPARTMENT AND/OR THE HEALTHBOARD AND I WILL CONTACT THE IT HELPDESK PRIOR TO LEAVING THE DEPARTMENT/HB.</strong></p>
+
+        <div class="form-group pb-1 row">
+            <div class="col-lg-4">
+                <label for="receivingUser">Receiving User</label>
+                <input class="form-control" type="text" id="receivingUser" placeholder="Username" name ="username" required value="{{user_form_data.staffMember}}">
+            </div>
+        </div>
+        <div class="">
+            <div class="d-inline"><button type="submit" class="btn btn-primary mt-1">Submit</button></div> 
+            <div class="d-inline"><a href="{{url_for('closeUser', form_id=user_form_data.id)}}"><button type="button" class="btn btn-danger mt-1">Close Form</button></a></div>
+        </div>
+    </form>
+        
+    {%endif%}
+
 </div>
 
 

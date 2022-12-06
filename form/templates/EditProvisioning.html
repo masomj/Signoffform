@@ -7,70 +7,142 @@
         <h2>Provisioning Sign Off</h2>
     </div>
     
-    <form method="POST" action="{{url_for('editprovisioning', form_id=form.id, prov_form = prov_form.id)}}" class="">
+    
 
+        {%if prov_form.closed %}
+            <form method="" action="" class="">
+                <div class="form-group pb-1 row">
+                    <div class="col-lg-4">
+                        <label for="deviceModel" class="form-check-label">Device Model</label>
+                        <input type="text" name="deviceModel" class="form-control" id="deviceModel" value="{{prov_form.deviceModel}}" readonly>
+                    </div>
+                </div>
 
-        <div class="form-group pb-1 row">
-            <div class="col-lg-4">
-                <label for="deviceModel" class="form-check-label">Device Model</label>
-                <input type="text" name="deviceModel" class="form-control" id="deviceModel" value="{{prov_form.deviceModel}}">
-            </div>
-        </div>
+                <div class="form-group pb-1 row">
+                    <div class="col-lg-4">
+                        <label for="serviceTag" class="form-check-label">Service Tag</label>
+                        <input type="text" name="serviceTag" class="form-control" id="serviceTag" value="{{prov_form.serviceTag}}" readonly>
+                    </div>
+                </div>
 
-        <div class="form-group pb-1 row">
-            <div class="col-lg-4">
-                <label for="serviceTag" class="form-check-label">Service Tag</label>
-                <input type="text" name="serviceTag" class="form-control" id="serviceTag" value="{{prov_form.serviceTag}}">
-            </div>
-        </div>
+                <div class="form-group pb-1 row">
+                    <div class="col-lg-4">
+                        <label for="assetTag" class="form-check-label">Asset Tag</label>
+                        <input type="text" name="assetTag" class="form-control" id="assetTag" value="{{prov_form.assetTag}}" readonly>
+                    </div>
+                </div>
 
-        <div class="form-group pb-1 row">
-            <div class="col-lg-4">
-                <label for="assetTag" class="form-check-label">Asset Tag</label>
-                <input type="text" name="assetTag" class="form-control" id="assetTag" value="{{prov_form.assetTag}}">
-            </div>
-        </div>
+                <div class="form-check pb-1">
+                    <label for="windowsUpdates" class="from-check-label">Windows Updates complete: </label>
+                    <input type="checkbox" name="windowsUpdates" class="form-check-input" id="windowsUpdates" value="True" {% if prov_form.windowsUpdates == True %} checked {%endif%} readonly>
+                </div>
 
-        <div class="form-check pb-1">
-            <label for="windowsUpdates" class="from-check-label">Windows Updates complete: </label>
-            <input type="checkbox" name="windowsUpdates" class="form-check-input" id="windowsUpdates" value="True" {% if prov_form.windowsUpdates == True %} checked {%endif%}>
-        </div>
+                <div class="form-check pb-1">
+                    <label for="bitlocker" class="from-check-label">Bitlocker 100% encrypted</label>
+                    <input type="checkbox" name="bitlocker" class="form-check-input" id="bitlocker" value="True" {% if prov_form.bitlocker == True %} checked {%endif%} readonly>
+                </div>
 
-        <div class="form-check pb-1">
-            <label for="bitlocker" class="from-check-label">Bitlocker 100% encrypted</label>
-            <input type="checkbox" name="windowsUpdates" class="form-check-input" id="bitlocker" value="True" {% if prov_form.Bitlocker == True %} checked {%endif%}>
-        </div>
+                <div class="form-check pb-1">
+                    <label for="userSoftware" class="from-check-label">Install any requested user software</label>
+                    <input type="checkbox" name="userSoftware" class="form-check-input" id="userSoftware" value="True" {% if prov_form.userSoftware == True %} checked {%endif%} readonly>
+                </div>
 
-        <div class="form-check pb-1">
-            <label for="userSoftware" class="from-check-label">Install any requested user software</label>
-            <input type="checkbox" name="userSoftware" class="form-check-input" id="userSoftware" value="True" {% if prov_form.userSoftware == True %} checked {%endif%}>
-        </div>
+                <div class="form-check pb-1">
+                    <label for="ADgroups" class="from-check-label">Replicate any AD and Print Groups</label>
+                    <input type="checkbox" name="ADgroups" class="form-check-input" id="ADgroups" value="True" {% if prov_form.ADgroups == True %} checked {%endif%} readonly>
+                </div>
 
-        <div class="form-check pb-1">
-            <label for="ADgroups" class="from-check-label">Replicate any AD and Print Groups</label>
-            <input type="checkbox" name="ADgroups" class="form-check-input" id="ADgroups" vvalue="True" {% if prov_form.ADgroups == True %} checked {%endif%}>
-        </div>
+                <div class="form-check pb-1">
+                    <label for="desktopIcons" class="from-check-label">All standard dekstop icons are present</label>
+                    <input type="checkbox" name="desktopIcons" class="form-check-input" id="desktopIcons" value="True" {% if prov_form.desktopIcons == True %} checked {%endif%} readonly>
+                </div>
 
-        <div class="form-check pb-1">
-            <label for="desktopIcons" class="from-check-label">All standard dekstop icons are present</label>
-            <input type="checkbox" name="desktopIcons" class="form-check-input" id="desktopIcons" value="True" {% if prov_form.desktopIcons == True %} checked {%endif%}>
-        </div>
+                <div class="form-check pb-1">
+                    <label for="vpnIstalled" class="from-check-label">VPN Installed</label>
+                    <input type="checkbox" name="vpnInstalled"class="form-check-input" id="vpnIstalled" value="True" {% if prov_form.vpnInstalled == True %} checked {%endif%} readonly>
+                </div>
+                <div class="form-check pb-1"> 
+                    <input  class="form-check-input"type="checkbox" id="hardwareCheck" value="True" name="hardwareCheck" {% if prov_form.hardwareChecked == True %} checked {%endif%} readonly>
+                    <label for="hardwareCheck" class="form-check-label">Hardware Check</label>
+                </div>
 
-        <div class="form-check pb-1">
-            <label for="vpnIstalled" class="from-check-label">VPN Installed</label>
-            <input type="checkbox" name="vpnInstalled"class="form-check-input" id="vpnIstalled" value="True" {% if prov_form.vpnInstalled == True %} checked {%endif%}>
-        </div>
+                <div class="form-group pb-1 row">
+                    <div class="col-lg-4">
+                        <label for="provisioningUser">Provisioning Team Member</label>
+                        <input class="form-control" name="provisioningUser" type="text" id="provisioningUser" value="{{prov_form.staffMember}}" required readonly>
+                    </div>
+                </div>
+                
+            </form>
+        {% else %}
+            <form method="POST" action="{{url_for('editprovisioning', form_id=form.id, prov_form_id=prov_form.id)}}" class="">
+                    <div class="form-group pb-1 row">
+                        <div class="col-lg-4">
+                            <label for="deviceModel" class="form-check-label">Device Model</label>
+                            <input type="text" name="deviceModel" class="form-control" id="deviceModel" value="{{prov_form.deviceModel}}">
+                        </div>
+                    </div>
 
-        <div class="form-group pb-1 row">
-            <div class="col-lg-4">
-                <label for="provisioningUser">Provisioning Team Member</label>
-                <input class="form-control" name="provisioningUser" type="text" id="provisioningUser" required>
-            </div>
-        </div>
-        
-        <button type="submit" class="btn btn-primary mt-1">Submit</button>
+                    <div class="form-group pb-1 row">
+                        <div class="col-lg-4">
+                            <label for="serviceTag" class="form-check-label">Service Tag</label>
+                            <input type="text" name="serviceTag" class="form-control" id="serviceTag" value="{{prov_form.serviceTag}}">
+                        </div>
+                    </div>
 
-    </form>
+                    <div class="form-group pb-1 row">
+                        <div class="col-lg-4">
+                            <label for="assetTag" class="form-check-label">Asset Tag</label>
+                            <input type="text" name="assetTag" class="form-control" id="assetTag" value="{{prov_form.assetTag}}">
+                        </div>
+                    </div>
+
+                    <div class="form-check pb-1">
+                        <label for="windowsUpdates" class="from-check-label">Windows Updates complete: </label>
+                        <input type="checkbox" name="windowsUpdates" class="form-check-input" id="windowsUpdates" value="True" {% if prov_form.windowsUpdates == True %} checked {%endif%}>
+                    </div>
+
+                    <div class="form-check pb-1">
+                        <label for="bitlocker" class="from-check-label">Bitlocker 100% encrypted</label>
+                        <input type="checkbox" name="bitlocker" class="form-check-input" id="bitlocker" value="True" {% if prov_form.bitlocker == True %} checked {%endif%}>
+                    </div>
+
+                    <div class="form-check pb-1">
+                        <label for="userSoftware" class="from-check-label">Install any requested user software</label>
+                        <input type="checkbox" name="userSoftware" class="form-check-input" id="userSoftware" value="True" {% if prov_form.userSoftware == True %} checked {%endif%}>
+                    </div>
+
+                    <div class="form-check pb-1">
+                        <label for="ADgroups" class="from-check-label">Replicate any AD and Print Groups</label>
+                        <input type="checkbox" name="ADgroups" class="form-check-input" id="ADgroups" value="True" {% if prov_form.ADgroups == True %} checked {%endif%}>
+                    </div>
+
+                    <div class="form-check pb-1">
+                        <label for="desktopIcons" class="from-check-label">All standard dekstop icons are present</label>
+                        <input type="checkbox" name="desktopIcons" class="form-check-input" id="desktopIcons" value="True" {% if prov_form.desktopIcons == True %} checked {%endif%}>
+                    </div>
+
+                    <div class="form-check pb-1">
+                        <label for="vpnIstalled" class="from-check-label">VPN Installed</label>
+                        <input type="checkbox" name="vpnInstalled"class="form-check-input" id="vpnIstalled" value="True" {% if prov_form.vpnInstalled == True %} checked {%endif%}>
+                    </div>
+                    <div class="form-check pb-1"> 
+                        <input  class="form-check-input"type="checkbox" id="hardwareCheck" value="True" name="hardwareCheck"  {% if prov_form.hardwareChecked == True %} checked {%endif%}>
+                        <label for="hardwareCheck" class="form-check-label">Hardware Check</label>
+                    </div>
+
+                    <div class="form-group pb-1 row">
+                        <div class="col-lg-4">
+                            <label for="provisioningUser">Provisioning Team Member</label>
+                            <input class="form-control" name="provisioningUser" type="text" id="provisioningUser" value="{{prov_form.staffMember}}" required>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="d-inline"><button type="submit" class="btn btn-primary mt-1">Submit</button></div> 
+                        <div class="d-inline"><a href="{{url_for('closeProv', form_id=prov_form.id)}}"><button type="button" class="btn btn-danger mt-1">Close Form</button></a></div>
+                    </div>
+                </form>
+        {%endif%}
 </div>
 
 

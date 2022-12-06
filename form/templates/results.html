@@ -1,10 +1,11 @@
-{%extends "base.html" %}
+{% extends 'base.html'%}
+
 {% block content %}
 <div class="container">
-
     <div class="d-flex justify-content-start">
-        <h2>All Items</h2>
+        <h2>Search Result</h2>
     </div>
+
     <form method="POST" action="{{url_for('search')}}">
         <div class="row mb-2">
             <label for="search" name="search">Search ID:</label>
@@ -12,13 +13,7 @@
             <div class="col-lg-6"><button type="submit" class="btn btn-primary">Go</button></div>
         </div>
     </form>
-    <div class="justify-content-start">
-        {{ pagination.links }}
-       
-    </div>
-
-    <a href="{{url_for('create_form')}}" class="btn btn-primary">New Form</a>
-    <a href="{{url_for('closed')}}" class="btn btn-primary btn-danger">Closed items</a>
+    <a href="{{url_for('index')}}" class="btn btn-primary">Home</a>
 
     <div class="table-responsive">
         <table class="table table-hover">
@@ -37,14 +32,14 @@
                         User
                     </th>
                     <th>
-
+                        Status
                     </th>
                 </tr>
             </thead>
             <tbody>
-                {%for form in forms%}
-                    {% if not form.closed %}
-                        <tr>
+                
+                    
+                    <tr>
                             <td>
                                 
                                 {{form.id}}
@@ -66,17 +61,20 @@
                                     <a href="{{url_for('edituser', form_id=form.id,user_form_id=form.user_form_id )}}"><button class="btn btn-primary btn-sm">Details</button></a>
                                 {%endif%}
                             </td>
-                            <td>
-                                <a href="{{url_for('close', form_id = form.id)}}"><button type="button" class="btn btn-danger btn-sm">Close Form</button></a>
-                            </td>
-
+                            {%if not form.closed%}
+                                <td>
+                                    <a href="{{url_for('close', form_id = form.id)}}"><button type="button" class="btn btn-danger btn-sm">Close Form</button></a>
+                                </td>
+                            {%else%}
+                                <td>
+                                    <button class="btn btn-sm btn-danger">Closed</button>
+                                </td>
+                            {%endif%}
                         </tr>
-                    {% endif %}
-                {%endfor%}
 
             </tbody>
         </table>
     </div>
-
 </div>
+
 {% endblock %}

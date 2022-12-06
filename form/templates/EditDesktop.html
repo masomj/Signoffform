@@ -6,35 +6,79 @@
     <div class="d-flex justify-content-start mb-1">
         <h2>Desktop Sign Off</h2>
     </div>
-
-    <form method="POST" action="{{url_for('desktop')}}" class="">
-        <div class="form-check pb-1">
-            <input  class="form-check-input" type="checkbox" id="contactedUser" value="contactedUser" required>
-            <label for="contacterUser" class="form-check-label">Contacted User?</label>
-        </div>
-        <div class="form-check pb-1">
-            <input class="form-check-input" type="checkbox" value="collectOldDevice" required>
-            <label for="collectOldDevice" class="form-check-label">Collect Old Device</label>
-        </div>
-        <div class="form-check pb-1">
-            <input class="form-check-input"type="checkbox" id="changeBitlocker" value="changeBitlocker" required>
-            <label for="changeBitlocker" class="form-check-label">Change Bitlocker</label>
-        </div>
-        <div class="form-check pb-1"> 
-            <input  class="form-check-input"type="checkbox" id="checkIP" value="checkIP" required>
-            <label for="checkIP" class="form-check-label">Check for any IP Resrvations</label>
-        </div>
-        <div class="form-group pb-1 row">
-            <div class="col-lg-4">
-                <label for="desktopUser">Desktop Support Team Member</label>
-                <input class="form-control" type="text" id="desktopUser" required>
+        {%if desktop_form_data.closed %}
+        <form method="" action="" class="">
+            <div class="form-check pb-1">
+                <input  class="form-check-input" type="checkbox" id="contactedUser" value="True" name="contactedUser" {% if desktop_form_data.contactedUser == True %} checked {%endif%} readonly>
+                <label for="contacterUser" class="form-check-label">Contacted User?</label>
             </div>
-        </div>
 
-        <button type="submit" class="btn btn-primary mt-1">Submit</button>
-        
+            <div class="form-check pb-1">
+                <input class="form-check-input" type="checkbox" value="True" name="collectOldDevice" {% if desktop_form_data.collectedOldDevice == True %} checked {%endif%} readonly>
+                <label for="collectOldDevice" class="form-check-label">Collect Old Device</label>
+            </div>
 
-        
-    </form>
+            <div class="form-check pb-1">
+                <input class="form-check-input"type="checkbox" id="changeBitlocker" value="True" name="changeBitlocker" {% if desktop_form_data.bitlockerPin == True %} checked {%endif%} readonly>
+                <label for="changeBitlocker" class="form-check-label">Change Bitlocker</label>
+            </div>
+
+            <div class="form-check pb-1">
+                <input class="form-check-input"type="checkbox" id="Onedrive" value="True" name="Onedrive" {% if desktop_form_data.Onedrive == True %} checked {%endif%} readonly>
+                <label for="Onedrive" class="form-check-label">Onedrive login</label>
+            </div>
+
+            <div class="form-check pb-1"> 
+                <input  class="form-check-input"type="checkbox" id="checkIP" value="True" name="checkIP" {% if desktop_form_data.IPreservation == True %} checked {%endif%} readonly>
+                <label for="checkIP" class="form-check-label">Check for any IP Resrvations</label>
+            </div>
+            
+            <div class="form-group pb-1 row">
+                <div class="col-lg-4">
+                    <label for="desktopUser">Desktop Support Team Member</label>
+                    <input class="form-control" type="text" id="desktopUser" name="desktopUser" value="{{desktop_form_data.StaffMember}}" readonly>
+                </div>
+            </div>
+        </form>
+        {% else %}
+        <form method="POST" action="{{url_for('editdesktop', form_id=form.id, desktop_form_id = desktop_form_data.id)}}" class="">
+            <div class="form-check pb-1">
+                <input  class="form-check-input" type="checkbox" id="contactedUser" value="True" name="contactedUser" {% if desktop_form_data.contactedUser == True %} checked {%endif%}>
+                <label for="contacterUser" class="form-check-label">Contacted User?</label>
+            </div>
+
+            <div class="form-check pb-1">
+                <input class="form-check-input" type="checkbox" value="True" name="collectOldDevice" {% if desktop_form_data.collectedOldDevice == True %} checked {%endif%}>
+                <label for="collectOldDevice" class="form-check-label">Collect Old Device</label>
+            </div>
+
+            <div class="form-check pb-1">
+                <input class="form-check-input"type="checkbox" id="changeBitlocker" value="True" name="changeBitlocker" {% if desktop_form_data.bitlockerPin == True %} checked {%endif%}>
+                <label for="changeBitlocker" class="form-check-label">Change Bitlocker</label>
+            </div>
+
+            <div class="form-check pb-1">
+                <input class="form-check-input"type="checkbox" id="Onedrive" value="True" name="Onedrive" {% if desktop_form_data.Onedrive == True %} checked {%endif%}>
+                <label for="Onedrive" class="form-check-label">Onedrive login</label>
+            </div>
+
+            <div class="form-check pb-1"> 
+                <input  class="form-check-input"type="checkbox" id="checkIP" value="True" name="checkIP" {% if desktop_form_data.IPreservation == True %} checked {%endif%}>
+                <label for="checkIP" class="form-check-label">Check for any IP Resrvations</label>
+            </div>
+            
+            <div class="form-group pb-1 row">
+                <div class="col-lg-4">
+                    <label for="desktopUser">Desktop Support Team Member</label>
+                    <input class="form-control" type="text" id="desktopUser" name="desktopUser" value="{{desktop_form_data.StaffMember}}">
+                </div>
+            </div>
+            <div class="">
+                <div class="d-inline"><button type="submit" class="btn btn-primary mt-1">Submit</button></div> 
+                <div class="d-inline"><a href="{{url_for('closeDesk',form_id=desktop_form_data.id)}}"><button type="button" class="btn btn-danger mt-1">Close Form</button></a></div>
+            </div>
+        </form>
+            
+        {%endif%}
 </div>
 {% endblock %}
